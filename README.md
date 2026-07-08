@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Azure Serverless Platform
 
 > **Status:** 🚧 Work in Progress
@@ -91,3 +92,6 @@ Future deployments may be introduced as the project matures.
 This repository is intended for learning, experimentation, and portfolio purposes. It does not represent a production deployment.
 
 The focus is on demonstrating engineering practices, Terraform design, and Azure architecture rather than maintaining permanently deployed cloud resources.
+=======
+# Serverless-Platform
+>>>>>>> origin/main
