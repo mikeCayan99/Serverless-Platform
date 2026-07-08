@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Azure Serverless Platform
 
 > **Status:** 🚧 Work in Progress
