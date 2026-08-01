@@ -2,15 +2,27 @@ pipeline {
     agent any
 
     stages {
-        stage('Terraform Version') {
+        stage('Checkout prüfen') {
             steps {
-                sh 'terraform version'
+                sh 'ls -la'
             }
         }
 
-        stage('Repository Inhalt') {
+        stage('Terraform Init') {
             steps {
-                sh 'ls -la'
+                sh 'terraform init -backend=false'
+            }
+        }
+
+        stage('Terraform Format') {
+            steps {
+                sh 'terraform fmt -check -recursive'
+            }
+        }
+
+        stage('Terraform Validate') {
+            steps {
+                sh 'terraform validate'
             }
         }
     }
