@@ -75,3 +75,5 @@ This repository is intended for learning, experimentation, and portfolio purpose
 
 The focus is on demonstrating engineering practices, Terraform design, and Azure architecture rather than maintaining permanently deployed cloud resources.
 
+Last CI test: 2026-08-01
+
