@@ -1,6 +1,12 @@
 pipeline {
     agent any
 
+    options {
+        timestamps()
+        disableConcurrentBuilds()
+        buildDiscarder(logRotator(numToKeepStr: '10'))
+    }
+
     stages {
         stage('Checkout prüfen') {
             steps {
