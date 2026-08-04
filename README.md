@@ -2,78 +2,187 @@
 
 > **Status:** 🚧 Work in Progress
 
-## Overview
-
-This repository documents the development of a production-inspired Azure serverless platform using Infrastructure as Code (Terraform) and GitHub Actions.
-
-The primary goal of this project is to deepen practical knowledge of Azure architecture, Terraform module design, CI workflows, and infrastructure engineering following modern best practices.
-
-The implementation is intentionally developed incrementally and remains publicly accessible from the very beginning to transparently document the engineering process.
+Production-inspired Azure Serverless Platform built with Terraform, GitHub Actions, Jenkins, and Infrastructure as Code (IaC) best practices.
 
 ---
 
-## Project Goals
+# Overview
 
-- Build a modular Azure serverless platform using Terraform
-- Follow Infrastructure as Code (IaC) best practices
-- Design reusable Terraform modules
-- Implement GitHub Actions for validation and quality checks
-- Apply Azure architecture principles
+This repository documents the incremental development of a modular Azure serverless platform using Terraform.
+
+The project focuses on learning modern cloud engineering practices by combining Infrastructure as Code, CI pipelines, repository management, and Azure architecture in a public portfolio project.
+
+The infrastructure is intentionally developed step by step to demonstrate engineering decisions, continuous improvement, and DevOps workflows.
+
+---
+
+# Project Goals
+
+- Build a modular Azure Serverless Platform using Terraform
+- Apply Infrastructure as Code (IaC) best practices
+- Create reusable Terraform modules
+- Learn Azure architecture and cloud design principles
+- Implement CI pipelines with GitHub Actions and Jenkins
+- Demonstrate modern DevOps workflows using feature branches and pull requests
 - Continuously improve the platform through iterative development
 
 ---
 
-## Current Status
+# Current Status
 
-This project is currently under active development.
+The project is currently under active development.
 
-New features, architectural improvements, and documentation will be added continuously as the project evolves.
+The repository intentionally evolves over time and documents the complete engineering process rather than only publishing a finished solution.
+
+New Terraform modules, Azure services, CI improvements, documentation, and architectural decisions will be added continuously.
 
 ---
 
-## Deployment Policy
+# CI Strategy
 
-To keep development costs predictable, this repository intentionally focuses on infrastructure design, Terraform validation, code quality, and CI workflows.
+This project intentionally demonstrates two different Continuous Integration approaches.
 
-Terraform configurations are validated using commands such as:
+## GitHub Actions
+
+GitHub Actions provides repository-native automation and is used to validate Terraform code directly from GitHub.
+
+Current workflow includes:
+
+- Terraform formatting
+- Terraform validation
+- Repository automation
+
+---
+
+## Jenkins
+
+Jenkins is running locally inside a Docker container using a custom image with Terraform pre-installed.
+
+The Jenkins implementation demonstrates:
+
+- Pipeline as Code (`Jenkinsfile`)
+- Multibranch Pipelines
+- Feature branch validation
+- Build timestamps
+- Build retention policies
+- Prevention of concurrent builds
+- Post-build actions
+- Automatic workspace cleanup
+
+Current Jenkins pipeline:
+
+```text
+Checkout
+→ Terraform Init
+→ Terraform Format
+→ Terraform Validate
+→ Workspace Cleanup
+```
+
+The pipeline intentionally performs validation only.
+
+No infrastructure is deployed automatically.
+
+---
+
+# Deployment Policy
+
+To keep development completely cost-efficient, this repository intentionally focuses on infrastructure design, validation, code quality, and CI workflows.
+
+Terraform commands currently executed include:
 
 ```bash
 terraform fmt
 terraform validate
+terraform init -backend=false
 ```
 
-At this stage, **`terraform apply` is intentionally not executed as part of the public project**. This avoids unnecessary Azure consumption costs while still demonstrating infrastructure design, Terraform best practices, repository organization, and CI/CD workflows.
+`terraform apply` is intentionally **not** executed as part of this public project.
 
-Future deployments may be introduced as the project matures.
+This allows the repository to demonstrate engineering practices, CI/CD pipelines, and Infrastructure as Code without creating unnecessary Azure costs.
+
+Future deployment stages may be introduced as the platform matures.
 
 ---
 
-## Technologies
+# Technologies
 
 - Microsoft Azure
 - Terraform
+- Jenkins
 - GitHub Actions
+- Docker
 - Git
+- GitHub
 - Visual Studio Code
 
 ---
 
-## Repository Structure
+# Repository Structure
 
-```
+```text
 .
 ├── .github/
+│   └── workflows/
 ├── docs/
 ├── environments/
 ├── modules/
+├── Jenkinsfile
 └── README.md
 ```
 
-## Disclaimer
+---
 
-This repository is intended for learning, experimentation, and portfolio purposes. It does not represent a production deployment.
+# Roadmap
 
-The focus is on demonstrating engineering practices, Terraform design, and Azure architecture rather than maintaining permanently deployed cloud resources.
+## Current
 
-Last CI test: 2026.08.01
+- [x] Terraform project initialization
+- [x] GitHub repository
+- [x] GitHub Actions CI
+- [x] Jenkins Pipeline
+- [x] Jenkins Multibranch Pipeline
+- [x] Terraform validation pipeline
 
+## Next Steps
+
+- [ ] Modular Terraform architecture
+- [ ] Azure Storage Account
+- [ ] Azure Functions
+- [ ] Azure Key Vault
+- [ ] Azure Monitor
+- [ ] Application Insights
+- [ ] Event Grid
+- [ ] Service Bus
+- [ ] Environment separation (dev/test/prod)
+- [ ] Terraform Plan stage
+- [ ] Secure Azure authentication
+- [ ] Production-ready CI/CD workflow
+
+---
+
+# Learning Objectives
+
+This repository is intended to strengthen practical experience with:
+
+- Azure
+- Terraform
+- Infrastructure as Code
+- Jenkins
+- GitHub Actions
+- CI/CD
+- Git workflows
+- DevOps engineering
+- Cloud architecture
+
+---
+
+# Disclaimer
+
+This repository is maintained for learning, experimentation, and portfolio purposes.
+
+The primary goal is to demonstrate engineering practices, Infrastructure as Code, DevOps workflows, and Azure architecture rather than maintaining permanently deployed cloud resources.
+
+---
+
+**Last CI Update:** 2026-08-04
