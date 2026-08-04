@@ -7,10 +7,6 @@ pipeline {
         buildDiscarder(logRotator(numToKeepStr: '10'))
     }
 
-    environment {
-    TF_IN_AUTOMATION = 'true'
-    TF_INPUT         = 'false'
-}
     parameters {
         booleanParam(
             name: 'RUN_FORMAT_CHECK',
@@ -25,7 +21,11 @@ pipeline {
         )
     }
 
-    
+    environment {
+        TF_IN_AUTOMATION = 'true'
+        TF_INPUT         = 'false'
+    }
+
     stages {
         stage('Checkout prüfen') {
             steps {
@@ -40,12 +40,24 @@ pipeline {
         }
 
         stage('Terraform Format') {
+            when {
+                expression {
+                    return params.RUN_FORMAT_CHECK
+                }
+            }
+
             steps {
                 sh 'terraform fmt -check -recursive'
             }
         }
 
         stage('Terraform Validate') {
+            when {
+                expression {
+                    return params.RUN_VALIDATE
+                }
+            }
+
             steps {
                 sh 'terraform validate'
             }
