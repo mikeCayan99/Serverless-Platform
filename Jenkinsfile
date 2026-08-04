@@ -32,4 +32,19 @@ pipeline {
             }
         }
     }
+
+    post {
+        success {
+            echo 'Terraform Pipeline erfolgreich.'
+        }
+
+        failure {
+            echo 'Terraform Pipeline fehlgeschlagen.'
+        }
+
+        always {
+            echo 'Workspace wird bereinigt.'
+            cleanWs()
+        }
+    }
 }
