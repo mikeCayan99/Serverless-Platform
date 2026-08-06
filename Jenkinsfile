@@ -24,6 +24,7 @@ pipeline {
     environment {
         TF_IN_AUTOMATION = 'true'
         TF_INPUT         = 'false'
+        DEMO_SECRET      = credentials('demo-secret')
     }
 
     stages {
@@ -60,6 +61,19 @@ pipeline {
 
             steps {
                 sh 'terraform validate'
+            }
+        }
+
+        stage('Credential prüfen') {
+            steps {
+                sh '''
+                    if [ -n "$DEMO_SECRET" ]; then
+                        echo "Credential wurde erfolgreich geladen."
+                    else
+                        echo "Credential konnte nicht geladen werden."
+                        exit 1
+                    fi
+                '''
             }
         }
     }
