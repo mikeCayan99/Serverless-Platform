@@ -1,4 +1,4 @@
-pipeline {
+ppipeline {
     agent any
 
     options {
@@ -39,27 +39,31 @@ pipeline {
             }
         }
 
-        stage('Terraform Format') {
-            when {
-                expression {
-                    return params.RUN_FORMAT_CHECK
+        stage('Terraform Checks') {
+            parallel {
+                stage('Terraform Format') {
+                    when {
+                        expression {
+                            return params.RUN_FORMAT_CHECK
+                        }
+                    }
+
+                    steps {
+                        sh 'terraform fmt -check -recursive'
+                    }
                 }
-            }
 
-            steps {
-                sh 'terraform fmt -check -recursive'
-            }
-        }
+                stage('Terraform Validate') {
+                    when {
+                        expression {
+                            return params.RUN_VALIDATE
+                        }
+                    }
 
-        stage('Terraform Validate') {
-            when {
-                expression {
-                    return params.RUN_VALIDATE
+                    steps {
+                        sh 'terraform validate'
+                    }
                 }
-            }
-
-            steps {
-                sh 'terraform validate'
             }
         }
 
