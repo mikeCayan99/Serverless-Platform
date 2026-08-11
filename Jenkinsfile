@@ -67,6 +67,12 @@ pipeline {
             }
         }
 
+        stage('Manual Approval') {
+            steps {
+                input message: 'Mit der Pipeline fortfahren?'
+            }
+        }
+
         stage('Credential prüfen') {
             steps {
                 withCredentials([
