@@ -1,4 +1,6 @@
-resource "azurerm_resource_group" "serverless_lab" {
+module "resource_group" {
+  source = "./modules/resource-group"
+
   name     = "rg-serverless-lab-dev"
   location = "West Europe"
 }
