@@ -53,21 +53,6 @@ pipeline {
                     }
                 }
 
-                stage('Build Info erstellen') {
-                    steps {
-                        sh '''
-                            echo "Build: $BUILD_NUMBER" > build-info.txt
-                            echo "Branch: $BRANCH_NAME" >> build-info.txt
-                            '''
-                        }
-                    }
-
-                stage('Artifact speichern') {
-                    steps {
-                        archiveArtifacts artifacts: 'build-info.txt'
-                    }
-                }
-
                 stage('Terraform Validate') {
                     when {
                         expression {
@@ -79,6 +64,21 @@ pipeline {
                         sh 'terraform validate'
                     }
                 }
+            }
+        }
+
+        stage('Build Info erstellen') {
+            steps {
+                sh '''
+                    echo "Build: $BUILD_NUMBER" > build-info.txt
+                    echo "Branch: $BRANCH_NAME" >> build-info.txt
+                '''
+            }
+        }
+
+        stage('Artifact speichern') {
+            steps {
+                archiveArtifacts artifacts: 'build-info.txt'
             }
         }
 
