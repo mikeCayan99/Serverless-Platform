@@ -67,6 +67,21 @@ pipeline {
             }
         }
 
+        stage('Build Info erstellen') {
+            steps {
+                sh '''
+                    echo "Build: $BUILD_NUMBER" > build-info.txt
+                    echo "Branch: $BRANCH_NAME" >> build-info.txt
+                '''
+            }
+        }
+
+        stage('Artifact speichern') {
+            steps {
+                archiveArtifacts artifacts: 'build-info.txt'
+            }
+        }
+
         stage('Manual Approval') {
             steps {
                 input message: 'Mit der Pipeline fortfahren?'
