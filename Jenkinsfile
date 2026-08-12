@@ -85,6 +85,16 @@ pipeline {
             }
         }
 
+        stage('CatchError Test') {
+            steps {
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    sh 'exit 1'
+                }
+
+                 echo 'Pipeline läuft trotz Fehler weiter.'
+                }
+            }
+
         stage('Manual Approval') {
             options {
                 timeout(time: 10, unit: 'MINUTES')
