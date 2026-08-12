@@ -35,7 +35,10 @@ pipeline {
 
         stage('Terraform Init') {
             steps {
-                sh 'terraform init -backend=false'
+                retry(3) {
+                    sh 'terraform init -backend=false'
+                }
+            
             }
         }
 
@@ -83,10 +86,14 @@ pipeline {
         }
 
         stage('Manual Approval') {
-            steps {
-                input message: 'Mit der Pipeline fortfahren?'
+            options {
+                timeout(time: 10, unit: 'MINUTES')
+                }
+
+                steps {
+                    input message: 'Mit der Pipeline fortfahren?'
+                }
             }
-        }
 
         stage('Credential prüfen') {
             steps {
