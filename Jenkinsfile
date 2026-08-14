@@ -38,7 +38,6 @@ pipeline {
                 retry(3) {
                     sh 'terraform init -backend=false'
                 }
-            
             }
         }
 
@@ -85,43 +84,13 @@ pipeline {
             }
         }
 
-        stage('CatchError Test') {
-            steps {
-                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    sh 'exit 1'
-                }
-
-                 echo 'Pipeline läuft trotz Fehler weiter.'
-                }
-            }
-
         stage('Manual Approval') {
             options {
                 timeout(time: 10, unit: 'MINUTES')
-                }
-
-                steps {
-                    input message: 'Mit der Pipeline fortfahren?'
-                }
             }
 
-        stage('Credential prüfen') {
             steps {
-                withCredentials([
-                    string(
-                        credentialsId: 'demo-secret',
-                        variable: 'DEMO_SECRET'
-                    )
-                ]) {
-                    sh '''
-                        if [ -n "$DEMO_SECRET" ]; then
-                            echo "Credential wurde erfolgreich geladen."
-                        else
-                            echo "Credential konnte nicht geladen werden."
-                            exit 1
-                        fi
-                    '''
-                }
+                input message: 'Mit der Pipeline fortfahren?'
             }
         }
     }
