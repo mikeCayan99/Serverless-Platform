@@ -84,15 +84,7 @@ pipeline {
             }
         }
 
-        stage('Manual Approval') {
-            options {
-                timeout(time: 10, unit: 'MINUTES')
-            }
-
-            steps {
-                input message: 'Mit der Pipeline fortfahren?'
-            }
-        }
+    
     }
 
     post {
