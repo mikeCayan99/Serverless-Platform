@@ -28,3 +28,10 @@ variable "storage_account_access_key" {
   description = "Access key of the Storage Account used by the Function App"
   sensitive   = true
 }
+
+variable "application_insights_connection_string" {
+  type        = string
+  description = "Application Insights connection string"
+  sensitive   = true
+}
+
