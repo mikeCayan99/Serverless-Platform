@@ -22,5 +22,10 @@ resource "azurerm_linux_function_app" "function_app" {
       python_version = "3.11"
     }
   }
+
+  app_settings = {
+    APPLICATIONINSIGHTS_CONNECTION_STRING = var.application_insights_connection_string
+  }
+
 }
 
