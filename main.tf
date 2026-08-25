@@ -36,5 +36,16 @@ module "application_insights" {
   location            = module.resource_group.resource_group_location
 }
 
+module "key_vault" {
+  source = "./modules/key-vault"
+
+  key_vault_name      = "kv-serverless-lab-dev"
+  location            = module.resource_group.resource_group_location
+  resource_group_name = module.resource_group.resource_group_name
+
+  tenant_id    = var.tenant_id
+  principal_id = module.function_app.principal_id
+}
+
 
 
