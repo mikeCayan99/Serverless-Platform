@@ -1,6 +1,5 @@
 # Azure Serverless Platform
 
-> **Status:** 🚧 Work in Progress
 
 A modular Azure Serverless Platform built with Terraform and Jenkins, focusing on Infrastructure as Code, CI validation, security, observability, and practical Azure architecture.
 
@@ -432,11 +431,3 @@ Future improvements may include:
 * Additional serverless Azure integrations
 
 ---
-
-## Disclaimer
-
-This repository is a public Cloud/DevOps portfolio project and is under active development.
-
-It demonstrates Infrastructure as Code, Azure architecture, CI workflows, security, and observability patterns.
-
-The repository does not currently represent a permanently deployed production environment, and no automated infrastructure deployment is performed.
